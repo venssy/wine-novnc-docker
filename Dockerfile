@@ -11,10 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        fonts-wqy-zenhei \       # 文泉驿正黑（常用中文字体）
-        fonts-noto-cjk \        # Google Noto CJK 字体（覆盖全面）
-        language-pack-zh-hans \  # 中文语言包
-        locales && \
+        fonts-wqy-zenhei fonts-noto-cjk fonts-wqy-microhei language-pack-zh-hans locales  \
         software-properties-common wget curl supervisor x11vnc xvfb xterm fluxbox python3 ca-certificates && \
     . /etc/os-release && CODENAME=${UBUNTU_CODENAME:-${VERSION_CODENAME}} && \
     mkdir -pm755 /etc/apt/keyrings && \
