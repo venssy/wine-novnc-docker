@@ -24,7 +24,6 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --install-recommends winehq-stable && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-FROM ubuntu:22.04  # 或其他版本
 
 # 安装中文字体和 locale 支持
 # 生成 zh_CN.UTF-8 locale
