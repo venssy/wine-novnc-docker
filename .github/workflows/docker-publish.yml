@@ -8,6 +8,8 @@ on:
     tags: [ 'v*.*.*' ]  # 以版本号标签发布
   pull_request:
     branches: [ "main", "develop" ]
+  workflow_dispatch:
+  
 env:
   REGISTRY: "registry.cn-hangzhou.aliyuncs.com"  # 阿里云 ACR 地址
   IMAGE_NAME: venssy/wine-novnc
