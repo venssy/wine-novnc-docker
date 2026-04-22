@@ -31,7 +31,8 @@ RUN sed -i '/zh_CN.UTF-8/s/^# //g' /etc/locale.gen && \
 
 # 安装 winetricks
 RUN wget -q -O /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
-    chmod +x /usr/bin/winetricks
+    chmod +x /usr/bin/winetricks && \
+    winetricks riched20
 
 # 复制并执行下载 Gecko 和 Mono 的脚本
 COPY download_gecko_and_mono.sh /root/download_gecko_and_mono.sh
