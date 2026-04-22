@@ -12,6 +12,7 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         fonts-wqy-zenhei fonts-noto-cjk fonts-wqy-microhei language-pack-zh-hans locales  \
+        xvfb x11-utils \
         software-properties-common wget curl supervisor x11vnc xvfb xterm fluxbox python3 ca-certificates && \
     . /etc/os-release && CODENAME=${UBUNTU_CODENAME:-${VERSION_CODENAME}} && \
     mkdir -pm755 /etc/apt/keyrings && \
@@ -27,9 +28,6 @@ RUN sed -i '/zh_CN.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen zh_CN.UTF-8 && \
     # 设置默认 locale（可选）
     update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
-
-# 安装 Xvfb 和其他依赖
-RUN apt-get install -y xvfb x11-utils
 
 # 安装 winetricks
 RUN wget -q -O /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
