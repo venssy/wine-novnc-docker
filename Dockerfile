@@ -12,7 +12,6 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         fonts-wqy-zenhei \       # 文泉驿正黑（常用中文字体）
-        fonts-wqy-microhei \     # 文泉驿微米黑
         fonts-noto-cjk \        # Google Noto CJK 字体（覆盖全面）
         language-pack-zh-hans \  # 中文语言包
         locales && \
