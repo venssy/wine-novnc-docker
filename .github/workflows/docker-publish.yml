@@ -44,8 +44,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           push: ${{ github.event_name != 'pull_request' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
