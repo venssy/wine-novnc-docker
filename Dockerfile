@@ -11,6 +11,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
+        fonts-wqy-zenhei \       # 文泉驿正黑（常用中文字体）
+        fonts-wqy-microhei \     # 文泉驿微米黑
+        fonts-noto-cjk \        # Google Noto CJK 字体（覆盖全面）
+        language-pack-zh-hans \  # 中文语言包
+        locales && \
         software-properties-common wget curl supervisor x11vnc xvfb xterm fluxbox python3 ca-certificates && \
     . /etc/os-release && CODENAME=${UBUNTU_CODENAME:-${VERSION_CODENAME}} && \
     mkdir -pm755 /etc/apt/keyrings && \
@@ -19,6 +24,17 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --install-recommends winehq-stable && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+FROM ubuntu:22.04  # 或其他版本
+
+# 安装中文字体和 locale 支持
+# 生成 zh_CN.UTF-8 locale
+RUN sed -i '/zh_CN.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen zh_CN.UTF-8 && \
+    # 设置默认 locale（可选）
+    update-locale LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
+
+# 安装 Xvfb 和其他依赖
+RUN apt-get install -y xvfb x11-utils
 
 # 安装 winetricks
 RUN wget -q -O /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
